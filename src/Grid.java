@@ -14,11 +14,16 @@ public class Grid {
 
     private HashMap<Character, ArrayList<Coords>> charLocations;
 
-    public static final Coords[] dirs = {
-            new Coords(-1,0),
-            new Coords(0,1),
-            new Coords(1,0),
-            new Coords(0,-1),
+    public static final Coords[] DIRS = {
+            new Coords(-1,0), new Coords(0,1),
+            new Coords(1,0), new Coords(0,-1),
+    };
+
+    public static final Coords[] ALLDIRS = {
+            new Coords(-1, -1), new Coords(-1,0),
+            new Coords(-1,1), new Coords(1,-1),
+            new Coords(1,0), new Coords(1,1),
+            new Coords(0,1), new Coords(0,-1),
     };
 
     /**
@@ -63,13 +68,11 @@ public class Grid {
 
         rows = lines.length;
         cols = lines[rows-1].length();
-        System.out.println(cols);
         grid = new char[rows][cols];
         charLocations = new HashMap<>();
 
         for (int r=0; r<rows; r++) {
             for (int c=0; c<cols; c++) {
-                //System.out.println(c);
                 char tile = lines[r].charAt(c);
                 grid[r][c] = tile;
                 if (!charLocations.containsKey(tile)) {
@@ -175,6 +178,16 @@ public class Grid {
         if (this == o) return true;
         if (!(o instanceof Grid other)) return false;
         return Arrays.deepEquals(this.grid, other.grid);
+    }
+
+    public Grid copy() {
+        Grid newGrid = new Grid(rows, cols);
+        for (int r=0; r<rows; r++) {
+            for (int c=0; c<cols; c++) {
+                newGrid.set(r,c,get(r,c));
+            }
+        }
+        return newGrid;
     }
 
     /**
