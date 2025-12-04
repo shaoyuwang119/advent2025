@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Day3 {
-    public static void main(String[] args) throws IOException{
+    static void main(String[] args) throws IOException{
         String file = "src/input.txt";
         solve(file);
         //part2(file);
@@ -30,6 +30,7 @@ public class Day3 {
         int cur = 0;
         for (int i=bats; i>0; i--) {
             int max = maxIndex(nums, cur, nums.length-i);
+            System.out.println(max);
             cur = max+1;
             s += nums[max];
         }
