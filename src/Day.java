@@ -3,16 +3,15 @@ import java.io.*;
 
 public class Day {
     public static void main(String[] args) throws IOException{
+        long startTime = System.nanoTime();
+
         String file = "sample.txt";
-        part1(file);
-        part2(file);
+        solve(file);
+
+        System.out.println("exec time (ms): " + (System.nanoTime()-startTime)/1_000_000);
     }
 
-    static void part1(String file) throws IOException {
+    static void solve(String file) throws IOException {
         Scanner scan = new Scanner(new File(file));
-    }
-
-    static void part2(String file) throws IOException {
-
     }
 }
