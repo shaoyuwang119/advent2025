@@ -12,7 +12,7 @@ public class Grid {
     private int rows;
     private int cols;
 
-    private HashMap<Character, ArrayList<Coords>> charLocations;
+    private HashMap<Character, Set<Coords>> charLocations;
 
     public static final Coords[] DIRS = {
             new Coords(-1,0), new Coords(0,1),
@@ -76,7 +76,7 @@ public class Grid {
                 char tile = lines[r].charAt(c);
                 grid[r][c] = tile;
                 if (!charLocations.containsKey(tile)) {
-                    charLocations.put(tile, new ArrayList<>());
+                    charLocations.put(tile, new HashSet<>());
                 }
                 charLocations.get(tile).add(new Coords(r, c));
             }
@@ -99,12 +99,16 @@ public class Grid {
         }
     }
 
-    // TODO: FIGURE OUT A WAY TO COPY THE ARRAYLIST SO IT RETURNS AN ARRAYLIST OF COORDS
+    // TODO: FIGURE OUT A WAY TO COPY THE SET SO IT RETURNS A SET OF COORDS
     public Coords getCharLocation(char c) {
         if (charLocations.get(c).size() != 1) {
             throw new IllegalArgumentException("This character can be found multiple times throughout the grid!");
         }
-        return charLocations.get(c).getFirst();
+        Coords loc = new Coords();
+        for (Coords coords : charLocations.get(c)) {
+            loc = coords;
+        }
+        return loc;
     }
 
     public int rows() {

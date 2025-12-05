@@ -17,18 +17,20 @@ public class Day4 {
         //grid.print();
 
         int p1 = 0; int p2=0;
-        p1 = removeRolls(grid, 1);
-        p2 = removeRolls(grid, 800);
+        p1 = removeRolls(grid, false);
+        p2 = removeRolls(grid, true);
 
         System.out.println(p1 + " " + p2);
     }
 
-    static int removeRolls(Grid grid, long times) {
+    static int removeRolls(Grid grid, boolean p2) {
         grid = grid.copy();
         Grid grid2 = grid.copy();
         int totalRolls = 0;
+        int newRolls = -1;
 
-        for (int t = 0; t < times; t++) {
+        do  {
+            newRolls = 0;
             for (int r = 0; r < grid.rows(); r++) {
                 for (int c = 0; c < grid.cols(); c++) {
                     int rolls = 0;
@@ -44,12 +46,13 @@ public class Day4 {
                     }
                     if (rolls < 4) {
                         grid2.set(cur, '.');
-                        totalRolls++;
+                        newRolls++;
                     }
                 }
             }
+            totalRolls += newRolls;
             grid = grid2.copy();
-        }
+        } while (newRolls != 0 && p2);
 
         return totalRolls;
     }
