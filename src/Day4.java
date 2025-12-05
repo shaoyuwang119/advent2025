@@ -27,7 +27,7 @@ public class Day4 {
         grid = grid.copy();
         Grid grid2 = grid.copy();
         int totalRolls = 0;
-        int newRolls = -1;
+        int newRolls;
 
         do  {
             newRolls = 0;
