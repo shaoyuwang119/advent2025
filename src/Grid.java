@@ -66,13 +66,19 @@ public class Grid {
         str = str.replaceFirst("(\r\n|\r|\n)$", ""); // remove any newline at the end of the string
         String[] lines = str.split("\n", -1);
 
+        int maxLength = 0;
+        for (String line : lines) {
+            maxLength = Math.max(line.length(), maxLength);
+        }
+
         rows = lines.length;
-        cols = lines[rows-1].length();
+        cols = maxLength;
         grid = new char[rows][cols];
         charLocations = new HashMap<>();
 
         for (int r=0; r<rows; r++) {
-            for (int c=0; c<cols; c++) {
+            Arrays.fill(grid[r], ' ');
+            for (int c=0; c<lines[r].length(); c++) {
                 char tile = lines[r].charAt(c);
                 grid[r][c] = tile;
                 if (!charLocations.containsKey(tile)) {
