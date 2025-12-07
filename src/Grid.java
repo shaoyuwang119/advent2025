@@ -12,7 +12,7 @@ public class Grid {
     private int rows;
     private int cols;
 
-    private HashMap<Character, Set<Coords>> charLocations;
+    private HashMap<Character, Set<Coords>> charLoc;
 
     public static final Coords[] DIRS = {
             new Coords(-1,0), new Coords(0,1),
@@ -54,7 +54,7 @@ public class Grid {
 
     /**
      * Constructs a blank {@code Grid} object with specified rows and columns.
-     * Will not initialize the {@code charLocations} {@code HashMap} object.
+     * Will not initialize the {@code charLoc} {@code HashMap} object.
      */
     public Grid(int rows, int cols) {
         this.rows = rows;
@@ -74,17 +74,17 @@ public class Grid {
         rows = lines.length;
         cols = maxLength;
         grid = new char[rows][cols];
-        charLocations = new HashMap<>();
+        charLoc = new HashMap<>();
 
         for (int r=0; r<rows; r++) {
             Arrays.fill(grid[r], ' ');
             for (int c=0; c<lines[r].length(); c++) {
                 char tile = lines[r].charAt(c);
                 grid[r][c] = tile;
-                if (!charLocations.containsKey(tile)) {
-                    charLocations.put(tile, new HashSet<>());
+                if (!charLoc.containsKey(tile)) {
+                    charLoc.put(tile, new HashSet<>());
                 }
-                charLocations.get(tile).add(new Coords(r, c));
+                charLoc.get(tile).add(new Coords(r, c));
             }
         }
     }
@@ -106,12 +106,12 @@ public class Grid {
     }
 
     // TODO: FIGURE OUT A WAY TO COPY THE SET SO IT RETURNS A SET OF COORDS
-    public Coords getCharLocation(char c) {
-        if (charLocations.get(c).size() != 1) {
+    public Coords getCharLoc(char c) {
+        if (charLoc.get(c).size() != 1) {
             throw new IllegalArgumentException("This character can be found multiple times throughout the grid!");
         }
         Coords loc = new Coords();
-        for (Coords coords : charLocations.get(c)) {
+        for (Coords coords : charLoc.get(c)) {
             loc = coords;
         }
         return loc;
@@ -126,6 +126,10 @@ public class Grid {
     }
 
     public char[] getRow(int rowIndex) {
+        return grid[rowIndex];
+    }
+
+    public char[] getRowCopy(int rowIndex) {
         return grid[rowIndex].clone();
     }
 
