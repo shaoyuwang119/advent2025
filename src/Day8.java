@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class Day8 {
-    private static class Pair {
+    static class Pair {
         public final int p1;
         public final int p2;
         public final double dist;
