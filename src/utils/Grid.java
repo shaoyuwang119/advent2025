@@ -1,3 +1,5 @@
+package utils;
+
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -27,9 +29,9 @@ public class Grid {
     };
 
     /**
-     * Constructs a new {@code Grid} object with specified file at path.
+     * Constructs a new {@code utils.Grid} object with specified file at path.
      * The file must contain lines of equal length.
-     * @param path the path to the file to be converted to {@code Grid} object. Use {@code Path.of()}
+     * @param path the path to the file to be converted to {@code utils.Grid} object. Use {@code Path.of()}
      *             if necessary to convert the path string to Path object.
      */
     public Grid(Path path) {
@@ -44,16 +46,16 @@ public class Grid {
     }
 
     /**
-     * Constructs a new {@code Grid} object with specified string.
+     * Constructs a new {@code utils.Grid} object with specified string.
      * The string must contain lines of equal length separated by {@code \n}.
-     * @param input the string to be converted to {@code Grid} object.
+     * @param input the string to be converted to {@code utils.Grid} object.
      */
     public Grid(String input) {
         initGrid(input);
     }
 
     /**
-     * Constructs a blank {@code Grid} object with specified rows and columns.
+     * Constructs a blank {@code utils.Grid} object with specified rows and columns.
      * Will not initialize the {@code charLoc} {@code HashMap} object.
      */
     public Grid(int rows, int cols) {
@@ -210,8 +212,8 @@ public class Grid {
      *
      * @param start the starting location
      * @param tgt the set of character targets
-     * @param visited stores the {@code Coords} already visited locations. Put a preexisting {@code HashSet} object here
-     *                if you want to find all the {@code Coords} in the cluster.
+     * @param visited stores the {@code utils.Coords} already visited locations. Put a preexisting {@code HashSet} object here
+     *                if you want to find all the {@code utils.Coords} in the cluster.
      * @return {@code int} value of the size of the cluster.
      */
     public int findClusterSize(Coords start, HashSet<Character> tgt, HashSet<Coords> visited) {

@@ -1,5 +1,7 @@
+import utils.Coords;
+import utils.Grid;
+
 import java.nio.file.Path;
-import java.util.*;
 import java.io.*;
 
 public class Day4 {
