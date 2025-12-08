@@ -1,3 +1,5 @@
+package utils;
+
 public record Coords (int r, int c) {
 
     public Coords() {
