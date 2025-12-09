@@ -2,14 +2,16 @@ package utils;
 
 import java.util.*;
 
-public class DyCon {
+public class DSU {
     private int[] id; // id[i] == parent of i
     private int[] size; // if i == a root: size[i] == size of tree with root at i
+    private int sets;
     private List<Integer> sizes;
 
-    public DyCon(int n) {
+    public DSU(int n) {
         id = new int[n];
         size = new int[n];
+        sets = n;
 
         for (int i=0; i<n; i++) {
             id[i] = i;
@@ -25,15 +27,16 @@ public class DyCon {
     }
 
     public void union(int i, int j) {
-        int ri = root(i);
-        int rj = root(j);
-        if (ri == rj) return;
-        if (size[ri] > size[rj]) {
-            id[rj] = ri;
-            size[ri] += size[rj];
+        i = root(i);
+        j = root(j);
+        if (i == j) return;
+        sets--;
+        if (size[i] > size[j]) {
+            id[j] = i;
+            size[i] += size[j];
         } else {
-            id[ri] = rj;
-            size[rj] += size[ri];
+            id[i] = j;
+            size[j] += size[i];
         }
     }
 
@@ -44,6 +47,8 @@ public class DyCon {
     public int getSize(int i) {
         return size[root(i)];
     }
+
+    public int getSets() {return sets; }
 
     public List<Integer> getSizes() {
         Set<Integer> checked = new HashSet<>();
