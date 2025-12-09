@@ -62,13 +62,4 @@ public class Day8 {
         System.out.println(p1 + " " + p2);
 
     }
-
-    static int[] parseLine(String s) {
-        String[] pos = s.split(",");
-        int[] box = new int[3];
-        for (int i=0; i<3; i++) {
-            box[i] = Integer.parseInt(pos[i]);
-        }
-        return box;
-    }
 }
